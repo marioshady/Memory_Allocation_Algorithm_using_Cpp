@@ -23,3 +23,7 @@ Because of two reasons
 2- It obtains the largest internal fragmentation, and this reduces the memory efficiency exponentially
 That's why it's called the Worst Algorithm
     
+I hope it can help you. 
+
+by Mario Shady: marioshady0@gmail.com
+and Mohamed Mohamed
