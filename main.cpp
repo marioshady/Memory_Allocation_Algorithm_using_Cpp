@@ -16,22 +16,20 @@
 
 using namespace std;
 
-void getblocksize(int blockarray[], int numberofblocks);
-void getprocesssize(int processarray[], int numberofprocceses);
+int * getblocksize(int blockarray[], int numberofblocks);
+int * getprocesssize(int processarray[], int numberofprocceses);
 void firstfit(int blockarray[], int numberofblocks, int processarray[], int numberofprocceses);
 void bestfit(int blockarray[], int numberofblocks, int processarray[], int numberofprocceses);
 void worstfit(int blockarray[], int numberofblocks, int processarray[], int numberofprocceses);
 
 string name;
 
+
 int main(int argc, const char * argv[]) {
-  
-    //Here we are giving template arrays, in case of the user want to test the differences between the three memory allocation algorithms
-    int blockarray[] = {100, 500, 200, 300, 600};
-    int processarray[] = {212, 417, 112, 426};
-    
-    
+ 
     char templateornot;
+    int * blockarray;
+    int * processarray;
     
     cout<<"Please enter your first Name: "<<endl;
     cin>>name;
@@ -48,16 +46,35 @@ int main(int argc, const char * argv[]) {
     if(templateornot=='y')
     {
         //In case that he want to test his own numbers, so here is another function that we made in order to take from the user the blocks and their sizes, and the proccesses and their sizes
-        
         cout << "Enter the number of blocks: ";
         cin >> numberofblocks;
         cout << "Enter the number of processes: ";
         cin >> numberofprocceses;
-        getblocksize(blockarray, numberofblocks);
-        getprocesssize(processarray, numberofprocceses);
+        blockarray= new int(numberofblocks);
+        processarray= new int(numberofprocceses);
+        blockarray= getblocksize(blockarray, numberofblocks);
+        processarray= getprocesssize(processarray, numberofprocceses);
               
     }
-    
+    else if (templateornot=='n')
+    {
+        //Here we are giving template arrays, in case of the user want to test the differences between the three memory allocation algorithms
+        blockarray= new int [5];
+        processarray= new int [5];
+        blockarray[0]=100;
+        blockarray[1]=500;
+        blockarray[2]=200;
+        blockarray[3]=300;
+        blockarray[4]=600;
+        
+        processarray[0]=212;
+        processarray[1]=417;
+        processarray[2]=112;
+        processarray[3]=426;
+        processarray[4]=230;
+           
+    }
+        
     //Here just to check that everything is going well
     
     cout<<"Number of blocks "<<numberofblocks<<endl;
@@ -103,7 +120,7 @@ int main(int argc, const char * argv[]) {
 }
 
 
-void getblocksize(int blockarray[], int numberofblocks)
+int * getblocksize(int blockarray[], int numberofblocks)
 {
     cout << "Please Dr. "<<name<< ", Enter size of each block: "<<endl;
     for (int i = 1; i <= numberofblocks; i++)
@@ -111,10 +128,11 @@ void getblocksize(int blockarray[], int numberofblocks)
         cout << "Size of Block No." << i << ": ";
         cin >> blockarray[i];
     }
+    return blockarray;
 }
 
 
-void getprocesssize(int processarray[], int numberofprocceses)
+int * getprocesssize(int processarray[], int numberofprocceses)
 {
     cout << "Please Dr. "<<name<< ", Enter size of each process: "<<endl;
 
@@ -125,7 +143,7 @@ void getprocesssize(int processarray[], int numberofprocceses)
         cout<<endl;
 
     }
-    
+    return processarray;
 }
 
 void firstfit(int blockarray[], int numberofblocks, int processarray[], int numberofprocceses)
